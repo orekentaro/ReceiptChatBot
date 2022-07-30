@@ -24,6 +24,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 @app.route("/", methods=['GET'])
 def test():
     try:
+        print('os.environ')
         return 'OKだよdd'
     except Exception as e:
         print(f"えらーろぐ{e}")
