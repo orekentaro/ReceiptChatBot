@@ -50,9 +50,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     try:
-        total, contact = map(int, event.message.text.split(' '))
-        rezept = RezeptCalculation(total, contact)
-        resutl = rezept.serialization(rezept.main())
+        if (text := event.message.text) in "使い方" or text in "教えて":
+            resutl = "【使い方】\n"
+            resutl += "メッセージを入力のフォームに半角で『総件数』『半角スペース』『CL件数』を入れて送信ボタンを押してね！\n"
+            resutl += "例）785 344"
+        else:
+            total, contact = map(int, text.split(' '))
+            rezept = RezeptCalculation(total, contact)
+            resutl = rezept.serialization(rezept.main())
     except Exception:
         resutl = "バグらせないでくれ"
     line_bot_api.reply_message(
