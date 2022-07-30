@@ -50,14 +50,14 @@ class RezeptCalculation:
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
-        return_txt = f"削除人数: {result_dict['reduction']}\n"
+        return_txt = f"削除人数: {result_dict['reduction']}人\n"
         return_txt += f"削除前パーセンテージ: {result_dict['percent']}\n"
-        return_txt += "-----------------------------------------------\n"
-        return_txt += "----------------↓エビデンス↓----------------------\n"
-        return_txt += "-----------------------------------------------\n"
+        return_txt += "----------------\n"
+        return_txt += "---↓エビデンス↓---\n"
+        return_txt += "----------------\n"
         return_txt += f"削除後パーセンテージ: {result_dict['result_percent']}\n"
-        return_txt += f"トータル人数: {result_dict['total']}\n"
-        return_txt += f"トータルコンタクト人数: {result_dict['contact']}\n"
-        return_txt += f"削除後トータル人数: {result_dict['result_total']}\n"
-        return_txt += f"削除後コンタクト人数: {result_dict['result_contact']}"
+        return_txt += f"トータル人数: {result_dict['total']}人\n"
+        return_txt += f"トータルコンタクト人数: {result_dict['contact']}人\n"
+        return_txt += f"削除後トータル人数: {result_dict['result_total']}人\n"
+        return_txt += f"削除後コンタクト人数: {result_dict['result_contact']}人"
         return return_txt
