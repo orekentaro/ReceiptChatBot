@@ -10,13 +10,13 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
-from config import LINE_BOT_API, HANDLER
+# from config import LINE_BOT_API, HANDLER
 from modules.rezept_calculation import RezeptCalculation
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi(LINE_BOT_API)
-handler = WebhookHandler(HANDLER)
+line_bot_api = LineBotApi("s8Q5GKHXNft77NFjOlxGey/w5DGMGIGPtI0VXGejD3mWZrDoP4jA1+NF7304hMKjWw+HUu8r3esiA09STedhHnmRB8tVPErjzWnO0YdhVynrDJHncdbh0WwAZQzrRS/ZJRWLOx1SG3xJRFhzvuE2dgdB04t89/1O/w1cDnyilFU=")
+handler = WebhookHandler("97606a458d1a1c8398558a6849e7dffd")
 
 
 @app.route("/", methods=['GET'])
