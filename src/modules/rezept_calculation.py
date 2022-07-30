@@ -50,7 +50,6 @@ class RezeptCalculation:
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
-        
         return_txt = "【計算結果】\n"
         return_txt += f"削除数: {result_dict['reduction']}人\n"
         return_txt += "\n"
