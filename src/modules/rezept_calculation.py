@@ -2,6 +2,7 @@ class RezeptCalculation:
     def __init__(self, total: int, contact: int) -> None:
         self.total: int = total
         self.contact: int = contact
+        self.percent: float = self._division(total, contact)
 
     def _rezept_calculation(self, total: int, contact: int) -> float:
         if total < contact:
@@ -22,30 +23,41 @@ class RezeptCalculation:
     def _check_percent(self, percernt: float) -> bool:
         return 40.0 <= percernt and percernt != 0
 
+    def _parse_percent(self, percent: float) -> str:
+        return_val = str(percent)[:4]
+        if return_val == "100.":
+            return_val = "100.0"
+        return f"{return_val}%"
+
     def main(self):
         percent, total, contact = self._rezept_calculation(
             self.total,
             self.contact
         )
         reduction = self.total - total
-        percent = str(percent)[:4]
+        percent = self._parse_percent(percent)
+        self.percent = self._parse_percent(self.percent)
 
-        percent = f"{percent}%"
         result_dict = {
                     "reduction": reduction,
-                    "percent": percent,
                     "total": self.total,
                     "contact": self.contact,
+                    "percent": self.percent,
                     "result_total": total,
-                    "result_contact": contact
+                    "result_contact": contact,
+                    "result_percent": percent
                 }
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
         return_txt = f"削除人数: {result_dict['reduction']}\n"
+        return_txt += f"削除前パーセンテージ: {result_dict['percent']}\n"
+        return_txt += "-----------------------------------------------\n"
+        return_txt += "----------------↓エビデンス↓----------------------\n"
+        return_txt += "-----------------------------------------------\n"
+        return_txt += f"削除後パーセンテージ: {result_dict['result_percent']}\n"
         return_txt += f"トータル人数: {result_dict['total']}\n"
         return_txt += f"トータルコンタクト人数: {result_dict['contact']}\n"
         return_txt += f"削除後トータル人数: {result_dict['result_total']}\n"
-        return_txt += f"削除後コンタクト人数: {result_dict['result_contact']}\n"
-        return_txt += f"削除後パーセンテージ: {result_dict['percent']}"
+        return_txt += f"削除後コンタクト人数: {result_dict['result_contact']}"
         return return_txt

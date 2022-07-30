@@ -14,8 +14,8 @@ from linebot.models import (
 from modules.rezept_calculation import RezeptCalculation
 
 app = Flask(__name__)
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN", "s8Q5GKHXNft77NFjOlxGey/w5DGMGIGPtI0VXGejD3mWZrDoP4jA1+NF7304hMKjWw+HUu8r3esiA09STedhHnmRB8tVPErjzWnO0YdhVynrDJHncdbh0WwAZQzrRS/ZJRWLOx1SG3xJRFhzvuE2dgdB04t89/1O/w1cDnyilFU=")
-YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET", "97606a458d1a1c8398558a6849e7dffd")
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN", "")
+YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET", "")
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
@@ -27,6 +27,7 @@ def test():
         return 'OKだよdd'
     except Exception as e:
         print(f"えらーろぐ{e}")
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
