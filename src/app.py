@@ -24,8 +24,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 @app.route("/", methods=['GET'])
 def test():
     try:
-        print(f"環境変数{os.environ}")
-        return 'OKだよdd'
+        return os.environ
     except Exception as e:
         print(f"えらーろぐ{e}")
 
@@ -50,9 +49,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    total, contact = map(int, event.message.text.split(' '))
-    rezept = RezeptCalculation(total, contact)
-    resutl = rezept.serialization(rezept.main())
+    try:
+        total, contact = map(int, event.message.text.split(' '))
+        rezept = RezeptCalculation(total, contact)
+        resutl = rezept.serialization(rezept.main())
+    except Exception:
+        resutl = "バグらせないで"
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=resutl))
