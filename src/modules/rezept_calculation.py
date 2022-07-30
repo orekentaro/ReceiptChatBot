@@ -61,11 +61,11 @@ class RezeptCalculation:
         return_txt += "🧐エビデンス🧐\n"
         return_txt += "--------------------\n"
         return_txt += "\n"
-        return_txt += "【削除前】"
+        return_txt += "【削除前】\n"
         return_txt += f"全数: {result_dict['total']}人\n"
         return_txt += f"CL数: {result_dict['contact']}人\n"
         return_txt += "\n"
-        return_txt += "【削除後】"
+        return_txt += "【削除後】\n"
         return_txt += f"全数: {result_dict['result_total']}人\n"
         return_txt += f"CL数: {result_dict['result_contact']}人"
         return return_txt
