@@ -1,10 +1,10 @@
-class RezeptCalculation:
+class ReceiptCalculation:
     def __init__(self, total: int, contact: int) -> None:
         self.total: int = total
         self.contact: int = contact
         self.percent: float = self._division(total, contact)
 
-    def _rezept_calculation(self, total: int, contact: int) -> float:
+    def _receipt_calculation(self, total: int, contact: int) -> float:
         if total < contact:
             return 0, 0, 0
         percent: float = self._division(total, contact)
@@ -30,7 +30,7 @@ class RezeptCalculation:
         return f"{return_val}%"
 
     def main(self):
-        percent, total, contact = self._rezept_calculation(
+        percent, total, contact = self._receipt_calculation(
             self.total,
             self.contact
         )

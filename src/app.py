@@ -11,7 +11,7 @@ from linebot.models import (
 )
 
 # from config import LINE_BOT_API, HANDLER
-from modules.rezept_calculation import RezeptCalculation
+from modules.receipt_calculation import ReceiptCalculation
 
 app = Flask(__name__)
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_BOT_CHANNEL_TOKEN", "")
@@ -51,18 +51,20 @@ def callback():
 def handle_message(event):
     try:
         if (text := event.message.text) in "使い方" or text in "教えて":
-            resutl = "【使い方】\n"
-            resutl += "メッセージを入力のフォームに半角で『総件数』『スペース』『CL件数』を入れて送信ボタンを押してね！\n"
-            resutl += "例）785 344"
+            result = "【使い方】\n"
+            result += "メッセージを入力のフォームに半角で『総件数』『スペース』『CL件数』を入れて送信ボタンを押してね！\n"
+            result += "例）785 344"
         else:
             total, contact = map(int, text.split(' '))
-            rezept = RezeptCalculation(total, contact)
-            resutl = rezept.serialization(rezept.main())
+            receipt = ReceiptCalculation(total, contact)
+            result = receipt.serialization(receipt.main())
     except Exception:
-        resutl = "バグらせないでくれ"
+        result = "例に倣って送ってね！\n"
+        result += "メッセージを入力のフォームに半角で『総件数』『スペース』『CL件数』\n"
+        result += "例）785 344"
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=resutl))
+        TextSendMessage(text=result))
 
 
 if __name__ == "__main__":
