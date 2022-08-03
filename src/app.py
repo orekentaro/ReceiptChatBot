@@ -11,7 +11,7 @@ from linebot.models import (
 )
 
 # from config import LINE_BOT_API, HANDLER
-from modules.receipt_calculation import ReceiptCalculation
+from modules.recept_calculation import ReceiptCalculation
 
 app = Flask(__name__)
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_BOT_CHANNEL_TOKEN", "")
@@ -68,4 +68,5 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    app.run(port=os.environ.get("PORT", 5000), host=os.environ.get("HOST", '0.0.0.0'))
+    app.run(port=os.environ.get("PORT", 5000),
+            host=os.environ.get("HOST", '0.0.0.0'))
