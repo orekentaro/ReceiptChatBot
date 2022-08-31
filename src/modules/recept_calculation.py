@@ -20,8 +20,8 @@ class ReceiptCalculation:
         except ZeroDivisionError:
             return 0
 
-    def _check_percent(self, percernt: float) -> bool:
-        return 40.0 <= percernt and percernt != 0
+    def _check_percent(self, percent: float) -> bool:
+        return 40.0 <= percent and percent != 0
 
     def _parse_percent(self, percent: float) -> str:
         return_val = str(percent)[:4]
@@ -39,14 +39,14 @@ class ReceiptCalculation:
         self.percent = self._parse_percent(self.percent)
 
         result_dict = {
-                    "reduction": reduction,
-                    "total": self.total,
-                    "contact": self.contact,
-                    "percent": self.percent,
-                    "result_total": total,
-                    "result_contact": contact,
-                    "result_percent": percent
-                }
+            "reduction": reduction,
+            "total": self.total,
+            "contact": self.contact,
+            "percent": self.percent,
+            "result_total": total,
+            "result_contact": contact,
+            "result_percent": percent
+        }
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
