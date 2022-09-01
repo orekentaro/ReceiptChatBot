@@ -1,6 +1,3 @@
-from multiprocessing import reduction
-
-
 class ReceiptCalculation:
     def __init__(self, total: int, contact: int) -> None:
         self.total: int = total
@@ -65,7 +62,7 @@ class ReceiptCalculation:
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
-        if result_dict[reduction] >= 0:
+        if result_dict["reduction"] >= 0:
             return_txt = "【計算結果】\n"
             return_txt += "40%を超えました🔥\n"
             return_txt += "\n"
