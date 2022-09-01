@@ -85,7 +85,7 @@ class ReceiptCalculation:
             return_txt += f"CL数: {result_dict['result_contact']}人"
         else:
             return_txt = "【計算結果】\n"
-            return_txt += "40%を下回りました🔥\n"
+            return_txt += "40%を下回りました💰\n"
             return_txt += "\n"
             return_txt += f"増加数: {result_dict['reduction'] * -1}人\n"
             return_txt += "\n"
@@ -94,7 +94,7 @@ class ReceiptCalculation:
             return_txt += "\n"
             return_txt += "\n"
             return_txt += "--------------------\n"
-            return_txt += "🧐エビデンス🧐\n"
+            return_txt += "🤔エビデンス🤔\n"
             return_txt += "--------------------\n"
             return_txt += "\n"
             return_txt += "【増加前】\n"
