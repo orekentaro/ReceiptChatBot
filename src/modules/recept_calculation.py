@@ -62,9 +62,9 @@ class ReceiptCalculation:
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
-        if result_dict["reduction"] >= 0:
+        if result_dict["reduction"] > 0:
             return_txt = "【計算結果】\n"
-            return_txt += "40%を超えました🔥\n"
+            return_txt += "🔥40%を超えました🔥\n"
             return_txt += "\n"
             return_txt += f"削除数: {result_dict['reduction']}人\n"
             return_txt += "\n"
@@ -83,9 +83,9 @@ class ReceiptCalculation:
             return_txt += "【削除後】\n"
             return_txt += f"全数: {result_dict['result_total']}人\n"
             return_txt += f"CL数: {result_dict['result_contact']}人"
-        else:
+        elif result_dict["reduction"] < 0:
             return_txt = "【計算結果】\n"
-            return_txt += "40%を下回りました💰\n"
+            return_txt += "💰40%を下回りました💰\n"
             return_txt += "\n"
             return_txt += f"増加数: {result_dict['reduction'] * -1}人\n"
             return_txt += "\n"
@@ -104,4 +104,9 @@ class ReceiptCalculation:
             return_txt += "【増加後】\n"
             return_txt += f"全数: {result_dict['result_total']}人\n"
             return_txt += f"CL数: {result_dict['result_contact']}人"
+        else:
+            return_txt = "【計算結果】\n"
+            return_txt += "🎉今の数字で大丈夫だよ🎉\n"
+            return_txt += "\n"
+            return_txt += f"結果: {result_dict['percent']}\n"
         return return_txt
