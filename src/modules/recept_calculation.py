@@ -108,5 +108,5 @@ class ReceiptCalculation:
             return_txt = "【計算結果】\n"
             return_txt += "🎉今の数字で大丈夫だよ🎉\n"
             return_txt += "\n"
-            return_txt += f"結果: {result_dict['percent']}\n"
+            return_txt += f"結果: {result_dict['percent']}"
         return return_txt
