@@ -58,7 +58,8 @@ def handle_message(event):
             total, contact = map(int, text.split(' '))
             receipt = ReceiptCalculation(total, contact)
             result = receipt.serialization(receipt.main())
-    except Exception:
+    except Exception as e:
+        print('エラー:', e)
         result = "例に倣って送ってね！\n"
         result += "メッセージを入力のフォームに半角で『総件数』『スペース』『CL件数』\n"
         result += "例）785 344"

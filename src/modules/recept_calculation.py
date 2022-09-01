@@ -1,5 +1,4 @@
 from multiprocessing import reduction
-from unicodedata import name
 
 
 class ReceiptCalculation:
