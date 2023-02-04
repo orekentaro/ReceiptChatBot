@@ -1,13 +1,21 @@
+from typing import Any, Tuple
+
+
 class ReceiptCalculation:
+    """レセプトの計算を行うクラス"""
+
     def __init__(self, total: int, contact: int) -> None:
+        """初期化"""
         self.total: int = total
         self.contact: int = contact
         self.percent: float = self._division(total, contact)
+        self.percent_string: str = self._parse_percent(self.percent)
 
-    def _receipt_calculation(self, total: int, contact: int) -> float:
+    def _receipt_calculation(self, total: int, contact: int) -> Tuple[float, int, int]:
+        """計算メイン関数"""
         if total < contact:
             return 0, 0, 0
-        percent: float = self._division(total, contact)
+        percent = self._division(total, contact)
         if not self._check_percent(percent):
             while not self._check_percent(percent):
                 if self._check_percent_under(total, contact):
@@ -23,32 +31,34 @@ class ReceiptCalculation:
         return percent, total, contact
 
     def _division(self, denominator: int, molecule: int) -> float:
+        """割合を計算"""
         try:
             return (molecule / denominator) * 100
         except ZeroDivisionError:
-            return 0
+            return 0.0
 
     def _check_percent(self, percent: float) -> bool:
+        """40%以上の判定"""
         return 40.0 <= percent and percent != 0
 
     def _check_percent_under(self, total: int, contact: int) -> bool:
-        percent = self._division(total+1, contact+1)
+        """割合の下限の確認"""
+        percent = self._division(total + 1, contact + 1)
         return 39.95 < percent and percent != 0
 
     def _parse_percent(self, percent: float) -> str:
+        """%形式にフォーマット"""
         return_val = str(percent)[:5]
         if return_val == "100.":
             return_val = "100.0"
         return f"{return_val}%"
 
-    def main(self):
-        percent, total, contact = self._receipt_calculation(
-            self.total,
-            self.contact
-        )
+    def main(self) -> dict[str, Any]:
+        """main関数"""
+        percent, total, contact = self._receipt_calculation(self.total, self.contact)
         reduction = self.total - total
-        percent = self._parse_percent(percent)
-        self.percent = self._parse_percent(self.percent)
+        percent_string = self._parse_percent(percent)
+        self.percent_string = self._parse_percent(self.percent)
 
         result_dict = {
             "reduction": reduction,
@@ -57,11 +67,12 @@ class ReceiptCalculation:
             "percent": self.percent,
             "result_total": total,
             "result_contact": contact,
-            "result_percent": percent
+            "result_percent": percent_string,
         }
         return result_dict
 
     def serialization(self, result_dict: dict) -> str:
+        """LINEのテキストにフォーマット"""
         return_txt = "【計算結果】\n"
         if result_dict["reduction"] > 0:
             return_txt += "🔥40%を超えました🔥\n"
@@ -108,3 +119,6 @@ class ReceiptCalculation:
             return_txt += "\n"
             return_txt += f"結果: {result_dict['percent']}"
         return return_txt
+
+
+# TODO: 39.85%
