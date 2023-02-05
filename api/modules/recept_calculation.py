@@ -25,6 +25,8 @@ class ReceiptCalculation:
                 percent = self._division(total, contact)
         else:
             while self._check_percent(percent):
+                if self._check_percent_over(total, contact):
+                    break
                 total -= 1
                 contact -= 1
                 percent = self._division(total, contact)
@@ -39,12 +41,17 @@ class ReceiptCalculation:
 
     def _check_percent(self, percent: float) -> bool:
         """40%以上の判定"""
-        return 40.0 <= percent and percent != 0
+        return 39.85 <= percent and percent != 0
 
     def _check_percent_under(self, total: int, contact: int) -> bool:
         """割合の下限の確認"""
         percent = self._division(total + 1, contact + 1)
-        return 39.95 < percent and percent != 0
+        return 39.90 <= percent and percent != 0
+
+    def _check_percent_over(self, total: int, contact: int) -> bool:
+        """割合の下限の確認"""
+        percent = self._division(total - 1, contact - 1)
+        return 39.90 >= percent and percent != 0
 
     def _parse_percent(self, percent: float) -> str:
         """%形式にフォーマット"""
