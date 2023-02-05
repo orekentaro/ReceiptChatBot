@@ -1,0 +1,13 @@
+Flask==2.1.2
+Jinja2==3.1.2
+gunicorn==20.1.0
+line-bot-sdk==2.2.1
+isort
+poetry
+mypy
+black
+pyproject-flake8
+pytest
+pytest-mock
+pytest-cov
+uwsgi

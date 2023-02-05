@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "example"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+black = "^21.11b1"
+isort = "^5.10.1"
+pyproject-flake8 = "^0.0.1-alpha.2"
+mypy = "^0.910"
+pytest = "^5.2"
+
+[tool.poetry.group.dev.dependencies]
+pyproject-flake8 = "^6.0.0"
+black = "^22.10.0"
+isort = "^5.10.1"
+mypy = "^0.991"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+known_local_folder=['config',]
+
+[tool.flake8]
+max-complexity = 18
+ignore = "E203,E266,E501,W503,"
+
+[tool.mypy]
+python_version = "3.10"
+no_strict_optional = true
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests",]
+filterwarnings = ["ignore::DeprecationWarning",]

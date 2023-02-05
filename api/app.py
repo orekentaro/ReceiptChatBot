@@ -1,14 +1,9 @@
-from flask import Flask, request, abort
 import os
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
+
+from flask import Flask, abort, request
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 # from config import LINE_BOT_API, HANDLER
 from modules.recept_calculation import ReceiptCalculation
@@ -21,7 +16,7 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=["GET"])
 def test():
     try:
         return "ok"
@@ -29,10 +24,10 @@ def test():
         print(f"えらーろぐ{e}")
 
 
-@app.route("/callback", methods=['POST'])
+@app.route("/callback", methods=["POST"])
 def callback():
     # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+    signature = request.headers["X-Line-Signature"]
 
     # get request body as text
     body = request.get_data(as_text=True)
@@ -44,7 +39,7 @@ def callback():
     except InvalidSignatureError:
         abort(400)
 
-    return 'OK'
+    return "OK"
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -55,19 +50,16 @@ def handle_message(event):
             result += "メッセージを入力のフォームに半角で『総件数』『スペース』『CL件数』を入れて送信ボタンを押してね！\n"
             result += "例）785 344"
         else:
-            total, contact = map(int, text.split(' '))
+            total, contact = map(int, text.split(" "))
             receipt = ReceiptCalculation(total, contact)
             result = receipt.serialization(receipt.main())
     except Exception as e:
-        print('エラー:', e)
+        print("エラー:", e)
         result = "例に倣って送ってね！\n"
         result += "メッセージを入力のフォームに半角で『総件数』『スペース』『CL件数』\n"
         result += "例）785 344"
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=result))
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
 
 
 if __name__ == "__main__":
-    app.run(port=os.environ.get("PORT", 5000),
-            host=os.environ.get("HOST", '0.0.0.0'))
+    app.run(port=8080, host="0.0.0.0")
