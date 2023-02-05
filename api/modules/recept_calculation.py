@@ -64,7 +64,7 @@ class ReceiptCalculation:
             "reduction": reduction,
             "total": self.total,
             "contact": self.contact,
-            "percent": self.percent,
+            "percent": self.percent_string,
             "result_total": total,
             "result_contact": contact,
             "result_percent": percent_string,

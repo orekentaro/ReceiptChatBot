@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 RUN poetry install --no-dev
 
 
-CMD ["python", "app.py"]
+CMD [ "uwsgi", "--ini", "app.ini" ]

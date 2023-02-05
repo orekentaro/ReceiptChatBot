@@ -25,7 +25,7 @@ def test_正常_100_0():
 
 def test_境界値_under():
     assert_dict = ReceiptCalculation(100, 39).main()
-    assert assert_dict["reduction"]
+    assert assert_dict["reduction"] == -1
     assert assert_dict["result_percent"] == "39.60%"
     assert assert_dict["percent"] == "39.0%"
     assert assert_dict["total"] == 100
@@ -45,11 +45,11 @@ def test_境界値_over():
     assert assert_dict["result_contact"] == 39
 
 
-def test_異常_zero_erorr():
+def test_異常_zero_error():
     assert_dict = ReceiptCalculation(0, 0).main()
     assert assert_dict["reduction"] == 0
-    assert assert_dict["result_percent"] == "0%"
-    assert assert_dict["percent"] == "0%"
+    assert assert_dict["result_percent"] == "0.0%"
+    assert assert_dict["percent"] == "0.0%"
     assert assert_dict["total"] == 0
     assert assert_dict["contact"] == 0
     assert assert_dict["result_total"] == 0
@@ -59,7 +59,7 @@ def test_異常_zero_erorr():
 def test_異常_計算不能():
     assert_dict = ReceiptCalculation(100, 100).main()
     assert assert_dict["reduction"] == 100
-    assert assert_dict["result_percent"] == "0%"
+    assert assert_dict["result_percent"] == "0.0%"
     assert assert_dict["percent"] == "100.0%"
     assert assert_dict["total"] == 100
     assert assert_dict["contact"] == 100
